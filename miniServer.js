@@ -5,9 +5,7 @@ function getClockTime() { return new Date()/1000.0; }
 var verbosity = 1;
 
 //var CHANNELS = ["position", "command", "people"];
-var CHANNELS = ["pano",
-                "MUSE.IOT",
-                "MUSE.AR"];
+var CHANNELS = ["MUSE"];
 
 var CHANNEL_STATS = {};
 
@@ -120,13 +118,6 @@ app.get('/stats', function(req, resp){
     }
     str += "</pre>";
     str += "<hr>";
-    str += "KinOSCWatcher:<br>\n";
-    if (kow) {
-	str += kow.getStatusHTML();
-    }
-    else {
-	str += "No KinOSCWatcher running<br>";
-    }
     resp.end(str);
 });
 

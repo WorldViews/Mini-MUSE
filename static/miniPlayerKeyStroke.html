@@ -1,6 +1,5 @@
 <html>
-  <body>
-  <script src="js/socket.io-1.4.5.js"></script>  
+  <body onkeypress="myKeyScript">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
     <textarea id="foo" 
@@ -11,30 +10,12 @@
 	  autofocus>
     </textarea>
     <script>
-
-      var sioURL = "localhost:8005";
-      console.log("getting socket at: "+sioURL);
-      var sock = io(sioURL);
-      console.log("Got socket "+sock);
-      sock.on("MUSE", msg => {
-          console.log("Got msg", msg);
-          if (msg.type == "MUSE.control")
-              handleControlMessage(msg);
-          else {
-              console.log("Unrecognized msg", msg);
-          }
-      });
-
-
-      function handleControlMessage(msg)
-      {
-          console.log("handleControlMessage", msg);
-          var videoId = msg.videoId;
-          player.loadVideoById(videoId);
-      }
-      
       // 2. This code loads the IFrame Player API code asynchronously.
 
+      console.log("Hello");
+      function myKeyScript(e) {
+         console.log("Got Key Event", e);
+      }
 
       var tag = document.createElement('script');
 
