@@ -174,7 +174,7 @@ app.get('/sendMessage*', function (req, resp) {
     console.log("/sendMessage path: "+req.path);
     var query = req.query;
     console.log("query: "+JSON.stringify(query));
-    var channel = query.channel || "pano";
+    var channel = query.channel || "MUSE";
     var msg = query;
     console.log("channel: "+channel + " msg: "+JSON.stringify(msg));
     handleChannel(channel, msg, null);
