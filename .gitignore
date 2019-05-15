@@ -1,0 +1,17 @@
+
+*~
+*.pyc
+*.bak
+*/old/*
+*/*/old/*
+site/FXPAL/images/*
+junk/*
+*/junk/*
+node_modules/*
+*/node_modules/*
+video/*
+admin/*
+
+controls/package-lock.json
+ssl
+playground

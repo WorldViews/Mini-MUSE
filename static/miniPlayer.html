@@ -1,0 +1,81 @@
+<html>
+  <body onkeypress="myKeyScript">
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+    <textarea id="foo" 
+	  cols="200",
+	  rows="5",
+	  //width="200px", 
+	  //height="100px", 
+	  autofocus>
+    </textarea>
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+
+      console.log("Hello");
+      function myKeyScript(e) {
+         console.log("Got Key Event", e);
+      }
+
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '750',
+          width: '1600',
+//        videoId: 'M7lc1UVf-VE',
+        videoId: 'uUkcD9jD5xY',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for 5 mins and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 300000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+      var elem = document.getElementById('foo');
+      elem.addEventListener('keypress', function(e){
+        console.log("keypress");
+        var n = e.keyCode - 48;
+        console.log("key: "+e.keyCode, n);
+       if (e.keyCode == 13) {
+       console.log('You pressed a "enter" key in somewhere');   
+        }
+        if (n == 1) {
+           var videoId = 'sT0hVLEe5mU';
+           player.loadVideoById(videoId);
+        }
+        if (n == 2) {
+           var videoId = 'uUkcD9jD5xY';
+           player.loadVideoById(videoId);
+        }
+});
+    </script>
+  </body>
+</html>

@@ -6,18 +6,14 @@ var verbosity = 1;
 
 //var CHANNELS = ["position", "command", "people"];
 var CHANNELS = ["pano",
-                "pano.heartbeat",
                 "MUSE.IOT",
-                "MUSE.AR",
-                "kinect",
-                "kinect.skel",
-                "kumo360"];
+                "MUSE.AR"];
 
 var CHANNEL_STATS = {};
 
 var activeSockets = [];
 
-var sprintf = require("./js/sprintf").sprintf;
+var sprintf = require("./static/js/sprintf").sprintf;
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
@@ -26,8 +22,6 @@ var express = require('express');
 var proxy = require('express-http-proxy');
 var bodyParser = require('body-parser');
 var exec = require("child_process").exec;
-var KOW = require("./js/KinOSCWatcher");
-var kow = null;
 
 function getConfig()
 {
@@ -73,10 +67,10 @@ try {
     
 
 app.get('/', function (req, res) {
-    res.sendFile('index.html', {root: __dirname});
+    res.sendFile('./static/index.html', {root: __dirname});
 });
 
-app.use(express.static(".."));
+app.use(express.static("./static"));
 app.use(bodyParser.json());
 
 app.use('/api', proxy('localhost:8080', {
@@ -302,22 +296,13 @@ if (serverSSL) {
     serverSSL.listen(portSSL, addr);
 }
 
-// This is to send messages via a socket.io client.
-//var ioClient = require("socket.io-client");
-//sioURL = "http://platonia:4000";
-//var kow = new KOW.KinOSCWatcher({clientSock: ioClient(sioURL)});
-
-// This sends them from us to listening clients:
-
 var localAddress = null;
 if (process.argv[2]) {
     localAddress = process.argv[2];
     console.log("Got local address "+localAddress);
-    kow = new KOW.KinOSCWatcher({msgWatcher: handleChannel, localAddress: localAddress});
 } else {
     require('dns').lookup(require('os').hostname(), function (err, add, fam) {
         localAddress = add;
         console.log("Got local address "+localAddress);
-        kow = new KOW.KinOSCWatcher({msgWatcher: handleChannel, localAddress: localAddress});
     })    
 }
