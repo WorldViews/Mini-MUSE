@@ -18,7 +18,6 @@ class MUSEControl
     constructor(sioURL) {
         var inst = this;
         if (!sioURL) {
-            //var sioURL = "http://platonia:4000";
             sioURL = document.location.host;
             var serverName = getParameterByName("server");
             if (serverName) {
@@ -29,7 +28,7 @@ class MUSEControl
         console.log("getting socket at: "+sioURL);
         this.sock = io(sioURL);
         console.log("Got socket "+this.sock);
-        this.sock.on("pano", msg => {
+        this.sock.on("MUSE", msg => {
             inst.handleMessage(msg);
         });
         //setInterval(function() { inst.update(); }, 50);
@@ -38,8 +37,6 @@ class MUSEControl
     handleMessage(msg) {
         console.log("Got message: ", msg);
     }
-
-    getURL() { return this.url; }
 
     sendMessage(msg, channel) {
         channel = channel || "MUSE";
@@ -67,26 +64,33 @@ class MUSEControl
     }
     
     setPlayTime(t) {
-        //portal.sendMessage({'type': 'pano.control', time: t} );
-        this.sendMessage({'type': 'pano.control', time: t} );
+        this.sendMessage({'type': 'setPlayTime', time: t} );
     }
 
     play() {
-        this.sendMessage({type: 'pano.control', playSpeed: 1} );
+        this.sendMessage({type: 'play', playSpeed: 1} );
     }
 
     pause() {
-        this.sendMessage({type: 'pano.control', playSpeed: 0} );
+        this.sendMessage({type: 'pause', playSpeed: 0} );
     }
 
     setVolume(v) {
-        this.sendMessage({type: 'pano.control', volume: v} );
+        this.sendMessage({type: 'setVolume', volume: v} );
     }
 
-    setVideo(videoId) {
+    setVideoId(videoId) {
         console.log("MUSEControl.setVideo "+videoId);
-        var msg = {type: 'MUSE.control',
+        var msg = {type: 'setVideoId',
                    videoId: videoId
+                  };
+        this.sendMessage(msg);
+    }
+
+    setDisplayURL(url) {
+        console.log("MUSEControl.setDisplayURL "+url);
+        var msg = {type: 'setDisplayURL',
+                   url: url
                   };
         this.sendMessage(msg);
     }

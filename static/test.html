@@ -18,21 +18,36 @@ VIDEO_IDS[3] = 'YfSUXAi80w8';
 
 function setVideo(num)
 {
-//    alert("in setVideo")
     var videoId = VIDEO_IDS[num];
-    console.log("setting video to", videoId);
-    mc.setVideo(videoId);
+    console.log("setting videoId to", videoId);
+    mc.setVideoId(videoId);
     return 0;
 }
+
+PAGES = [];
+PAGES[1] = 'http://fxpal.com';
+PAGES[2] = 'page2.html';
+PAGES[3] = 'page3.html';
+
+function setPage(num)
+{
+    var url = PAGES[num];
+    console.log("setting page URL  to", url);
+    mc.setDisplayURL(url);
+    return 0;
+}
+
 </script>
 
-<h3>Test Page</h3>
-<a href="./miniPlayer.html">Youtube Iframe Player</a><br>
-<!--
-<a href="" onclick="setVideo(1);">Video 1</a><br>
--->
+<h1>MUSE Controls Test Page</h1>
+<h3>Youtube Player</h3>
 <input type="button" value="Video 1" onclick="setVideo(1)"><br>
 <input type="button" value="Video 2" onclick="setVideo(2)"><br>
 <input type="button" value="Video 3" onclick="setVideo(3)"><br>
+
+<h3>Webpage Player</h3>
+<input type="button" value="Page 1" onclick="setPage(1)"><br>
+<input type="button" value="Page 2" onclick="setPage(2)"><br>
+<input type="button" value="Page 3" onclick="setPage(3)"><br>
 </body>
 </html>
