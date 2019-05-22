@@ -3,6 +3,7 @@ import urllib2, json, traceback, time
 
 PI_URL = "http://192.168.16.39:5000/detect.json"
 NUM_CALLS = 0
+DELAY = 0.3
 
 def sawPerson(obj):
     print "I saw a person"
@@ -43,6 +44,7 @@ def watchPi():
             getTrackedObjs(PI_URL)
         except:
             traceback.print_exc()
+        time.sleep(DELAY)
 
 if __name__ == '__main__':
     watchPi()
