@@ -71,16 +71,33 @@ function handleYoloData(yoloObj)
     console.log("handleYoloData");
     var objs = yoloObj.objects;
     var sawPerson = false;
+    var sawScissors = false;
+    var sawCup = false;
     objs.forEach(obj => {
         var label = obj.label;
-        if (label == 'person')
-            sawPerson = true;
+        if (label == 'scissors')
+            sawScissors = true; 
+        if (label == 'cup')
+            sawCup = true;    
         console.log(label, obj);
     });
-    var vidId = sawPerson ? 1 : 2;
+
+    if (sawScissors == true){
+        vidId = 1;
+        if (vidId != lastVidId)
+         setVideo(vidId);
+     lastVidId = vidId;
+    } else if (sawCup == true){
+        vidId = 2;
+        if (vidId != lastVidId)
+            setVideo(vidId);
+        lastVidId = vidId;   
+    }
+
+/*var vidId = sawScissors ? 1 : 2;
     if (vidId != lastVidId)
         setVideo(vidId);
-    lastVidId = vidId;
+    lastVidId = vidId; */
 }
 
 function fetchYoloInfo() {
