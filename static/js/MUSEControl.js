@@ -96,7 +96,7 @@ class MUSEControl
     }
 }
 
-function getJSON(url, handler)
+function getJSON(url, handler, errHandler)
 {
     console.log("Util.getJSON: "+url);
     $.ajax({
@@ -116,6 +116,8 @@ function getJSON(url, handler)
         },
         error: function(jqXHR, textStatus, errorThrown) {
             reportError("Failed to get JSON for "+url);
+            if (errHandler)
+                errHandler();
         }
     });
 }

@@ -103,10 +103,14 @@ function handleYoloData(yoloObj)
 function fetchYoloInfo() {
    url = "http://192.168.16.39:5000/detect.json";
    getJSON(url, obj => {
-       //console.log("got:", obj);
-       handleYoloData(obj);
-       fetchYoloInfo();
-   });
+            //console.log("got:", obj);
+            handleYoloData(obj);
+            fetchYoloInfo();
+        }, () => {
+            console.log("Got error but continuing anyway");
+            fetchYoloInfo();
+        }
+   );
 }
 
 $(document).ready(() => {
