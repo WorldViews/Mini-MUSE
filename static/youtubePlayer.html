@@ -62,11 +62,10 @@
     //    the player should play for 5 mins and then stop.
     var done = false;
     function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 300000);
-        done = true;
+        if (event.data == YT.PlayerState.ENDED) {
+          player.playVideo();
+        }
       }
-    }
     function stopVideo() {
       player.stopVideo();
     }
