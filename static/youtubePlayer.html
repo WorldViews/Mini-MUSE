@@ -43,8 +43,6 @@
       player = new YT.Player('player', {
         height: '750',
         width: '1600',
-        //        videoId: 'M7lc1UVf-VE',
-        videoId: 'uUkcD9jD5xY',
         events: {
           'onReady': onPlayerReady,
           'onStateChange': onPlayerStateChange
@@ -77,14 +75,6 @@
       console.log("key: " + e.keyCode, n);
       if (e.keyCode == 13) {
         console.log('You pressed a "enter" key in somewhere');
-      }
-      if (n == 1) {
-        var videoId = 'sT0hVLEe5mU';
-        player.loadVideoById(videoId);
-      }
-      if (n == 2) {
-        var videoId = 'uUkcD9jD5xY';
-        player.loadVideoById(videoId);
       }
     });
   </script>
