@@ -11,12 +11,13 @@ console.log("Getting MUSEControl");
 var mc = new MUSEControl();
 console.log("MUSEControl mc", mc);
 
+//var PI_URL = "http://192.168.201.201:5000/detect.json";
 var PI_URL = "http://192.168.16.39:5000/detect.json";
 //TODO: if this page is served by a server (rather than file:)
 // then get the address from the document.location
 VIDEO_IDS = [];
-VIDEO_IDS[1] = 'vLN43P2Icpw';
-VIDEO_IDS[2] = 'uUkcD9jD5xY';
+VIDEO_IDS[1] = 'qKEh_Sg99OY';
+VIDEO_IDS[2] = 'GAj_xz50VaY';
 VIDEO_IDS[3] = 'YfSUXAi80w8';
 
 
@@ -85,6 +86,7 @@ function handleYoloData(yoloObj)
         console.log(label, obj);
     });
 
+    vidId = null;
     if (sawScissors == true){
         vidId = 1;
         if (vidId != lastVidId)
@@ -96,11 +98,6 @@ function handleYoloData(yoloObj)
             setVideo(vidId);
         lastVidId = vidId;   
     }
-
-/*var vidId = sawScissors ? 1 : 2;
-    if (vidId != lastVidId)
-        setVideo(vidId);
-    lastVidId = vidId; */
 }
 
 function fetchYoloInfo() {
