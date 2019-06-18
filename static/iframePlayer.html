@@ -8,7 +8,8 @@
   </iframe>
   <script>
 
-      var sioURL = "localhost:8005";
+      //var sioURL = "localhost:8005";
+      var sioURL = location.host;
       console.log("getting socket at: "+sioURL);
       var sock = io(sioURL);
       console.log("Got socket "+sock);
