@@ -11,3 +11,4 @@ node_modules/*
 video/*
 admin/*
 ssl
+yoloOpenCV/models/yolov3.weights
