@@ -12,3 +12,4 @@ video/*
 admin/*
 ssl
 yoloOpenCV/models/yolov3.weights
+*.weights
