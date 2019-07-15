@@ -5,9 +5,9 @@ import time
 if __name__ == "__main__":
     print("Yolo Detect")
     # hardcode the files for yolo in the next line
-    config = "./models/yolov3.cfg"
-    weights = "./models/yolov3.weights"
-    classes = "./models/yolov3.txt"
+    config = "./models/yolo-obj.cfg"
+    weights = "./models/yolo-obj_final.weights"
+    classes = "./models/obj.names"
     yolo = YoloOpenCVDetector(config,weights,classes)
     # while true
     capture = cv2.VideoCapture(0)
