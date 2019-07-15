@@ -1,1 +1,2 @@
 Get weights for custom objects from shared folder. \\data2\groups\mixed\MUSE\yolo\weights
+put yolo-obj_final.weights into models directory
