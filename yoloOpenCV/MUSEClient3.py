@@ -5,13 +5,19 @@ from socketIO_client_nexus import SocketIO, LoggingNamespace
 
 class MUSEClient:
     def __init__(self):
-        pass
+        self.socket = None
 
     def on_connect(self, *args):
         print('on_connect', args)
         
     def onMessage(self, msg):
         print("On muse msg", msg)
+
+    def sendMessage(self, msg):
+        if not self.socket:
+            print("Cannot send message without socket")
+            return
+        self.socket.emit('MUSE', msg)
 
     def runInThread(self):
         self.thread = threading.Thread(target=lambda s=self: s.threadFun())
@@ -24,9 +30,12 @@ class MUSEClient:
         print("MUSEClient thread finished")
 
     def run(self):
+        url = 'http://localhost:8005'
+        print("trying to connect to", url)
         #with SocketIO('http://localhost:8005') as socketIO:
-        with SocketIO('http://localhost:8000') as socketIO:
+        with SocketIO(url) as socketIO:
             print("got socketIO", socketIO)
+            self.socket = socketIO
             socketIO.on('connect', lambda args, s=self: s.on_connect(args))
             #
             print("Send status.join message")
