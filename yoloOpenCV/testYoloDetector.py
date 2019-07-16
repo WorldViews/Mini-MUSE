@@ -19,6 +19,7 @@ if __name__ == "__main__":
         #i = cv2.imread("./data/dog.jpg")
         # call yolo on that image to get json
         output=yolo.jsonFromImage(frame)
+        print("type output", type(output))
         # print json to console
         print(output)
         # sleep 2 seconds 
