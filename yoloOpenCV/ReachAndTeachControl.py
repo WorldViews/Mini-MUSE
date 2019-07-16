@@ -2,6 +2,8 @@ from ControlScript import ControlScript
 import time
 import MUSEClient3
 
+SIOURL = "http://localhost:8005";
+
 PAGES = {}
 PAGES['heart'] = 'http://fxpal.com';
 PAGES['purse'] = 'http://xerox.com';
@@ -12,7 +14,7 @@ class ReachAndTeachScript(ControlScript):
     def __init__(self):
         ControlScript.__init__(self)
         self.currentObj = None
-        self.mc = MUSEClient3.MUSEClient()
+        self.mc = MUSEClient3.MUSEClient(SIOURL)
         self.mc.runInThread()
 
     def noticeNewObject(self, label):

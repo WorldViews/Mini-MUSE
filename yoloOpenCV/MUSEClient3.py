@@ -4,7 +4,8 @@ import time, threading
 from socketIO_client_nexus import SocketIO, LoggingNamespace
 
 class MUSEClient:
-    def __init__(self):
+    def __init__(self, url="http://localhost:8005"):
+        self.url = url
         self.socket = None
 
     def on_connect(self, *args):
@@ -30,10 +31,9 @@ class MUSEClient:
         print("MUSEClient thread finished")
 
     def run(self):
-        url = 'http://localhost:8005'
-        print("trying to connect to", url)
+        print("trying to connect to", self.url)
         #with SocketIO('http://localhost:8005') as socketIO:
-        with SocketIO(url) as socketIO:
+        with SocketIO(self.url) as socketIO:
             print("got socketIO", socketIO)
             self.socket = socketIO
             socketIO.on('connect', lambda args, s=self: s.on_connect(args))
