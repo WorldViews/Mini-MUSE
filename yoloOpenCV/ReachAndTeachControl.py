@@ -5,10 +5,10 @@ import MUSEClient3
 SIOURL = "http://localhost:8005";
 
 PAGES = {}
-PAGES['heart'] = 'http://fxpal.com';
-PAGES['purse'] = 'http://xerox.com';
-PAGES['crane'] = 'http://palweb';
-
+PAGES['heart'] = 'https://www.youtube.com/embed/KbCZfE0Wqgs?autoplay=1';
+PAGES['purse'] = 'https://www.youtube.com/embed/b6V8qubr664?autoplay=1';
+PAGES['crane'] = 'https://www.youtube.com/embed/uUkcD9jD5xY?autoplay=1';
+PAGES['chocolate'] = 'http://192.168.16.89:8005/youtubePlayer.html';
 
 class ReachAndTeachScript(ControlScript):
     def __init__(self):
