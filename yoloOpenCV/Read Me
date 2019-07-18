@@ -1,0 +1,19 @@
+Setup python3 and virtual environment
+For anaconda python3, activate virtual environment 
+with
+   conda activate venv
+
+for non anaconda you may need to do 
+    venv\Scripts\activate
+
+You need to install the following into the virtual environment
+
+    opencv-python
+    socketIO-client-nexus
+
+there are other dependencies you may need, listed in the
+requirements.txt
+
+Get weights for custom objects from shared folder
+ \\data2\groups\mixed\MUSE\yolo\weights
+put yolo-obj_final.weights into models directory

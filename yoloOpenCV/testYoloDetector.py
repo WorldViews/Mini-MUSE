@@ -13,10 +13,13 @@ if __name__ == "__main__":
     capture = cv2.VideoCapture(0)
     while (1):
         read_flag, frame = capture.read()
+        cv2.imshow("source", frame)
+        cv2.waitKey(1)
         # load an image from the webcam
         #i = cv2.imread("./data/dog.jpg")
         # call yolo on that image to get json
         output=yolo.jsonFromImage(frame)
+        print("type output", type(output))
         # print json to console
         print(output)
         # sleep 2 seconds 
