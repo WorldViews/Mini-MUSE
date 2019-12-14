@@ -2,11 +2,11 @@ from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 import os, urllib2, json
-import ImageResizer
+#import ImageResizer
 
 #IMAGE_DIR = "C:/kimber/WorldViews/twitter_images"
 IMAGE_DIR = "./"
-CONFIG_PATH = "D:/GitHub/WorldViews/Spirals/twitter_auth_config.py"
+CONFIG_PATH = "twitter_auth_config.py"
 """
 You can get authentication values at twitter developer website https://dev.twitter.com/
 """
@@ -39,23 +39,11 @@ def saveImage(url, id):
     ImageResizer.resizePow2(path, pow2path)
     return path
         
-def saveText(url, id):
-    path = "%s/%s.json" % (IMAGE_DIR, "tweet")
-    pow2path = "%s/%s_p2.jpg" % (IMAGE_DIR, id)
-    print "Saving to", path
-    try:
-        uos = urllib2.urlopen(url)
-    except:
-        print "Couldn't open", url
-        return None
-    try:
-        file(path, "wb").write(uos.read())
-    except:
-        print "Couldn't save", path
-        return None
-    ImageResizer.resizePow2(path, pow2path)
-    return path
-    
+def saveJSON(obj, jsonPath):
+    print "Saving to", jsonPath
+    json.dump(obj, file(jsonPath, "w"), indent=3)    
+
+PTOBJS = []
 
 class listener(StreamListener):
     n = 0
@@ -67,10 +55,14 @@ class listener(StreamListener):
         #    return True
         text = obj.get('text', None)
         geo = obj.get('geo', None)
+        ptObj = {'text': text}
+        PTOBJS.append(ptObj)
+        saveJSON(PTOBJS, "tweets.json")
         try:
             print text
         except:
             print "text wouldn't print"
+        return
         media_urls = []
         try:
             ents = obj['entities']
