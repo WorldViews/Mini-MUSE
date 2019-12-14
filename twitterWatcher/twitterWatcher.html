@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Yolo Watcher Test Page</title>
+</head>
+<body>
+<script src="js/socket.io-1.4.5.js"></script>
+<script src="js/MUSEControl.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script>
+
+var TWEET_URL= "../images/twitter_images/tweet.json"
+
+var TWEETS=[]
+
+function getJSON(url, handler, errFun)
+{
+    console.log("getJSON: "+url);
+    $.ajax({
+        url: url,
+        dataType: 'text',
+        success: function(str) {
+            var data;
+            try {
+                data = JSON.parse(str);
+            }
+            catch (err) {
+                console.log("err: "+err);
+                alert("Error in json for: "+url+"\n"+err);
+                errFun();
+                return;
+            }
+            handler(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Failed to get JSON for "+url);
+            if (errFun)
+               errFun();
+        }
+    });
+}
+
+function fetchYoloInfo() {
+   url = TWEET_URL;
+   
+   getJSON(url, obj => {
+            console.log("got:", obj);
+            fetchYoloInfo();
+        }, () => {
+            console.log("Got error but continuing anyway");
+            fetchYoloInfo();
+        }
+   );
+}
+
+var lastObj = null;
+$(document).ready(() => {
+    console.log("**** Document is ready ****");
+    if (obj !== lastObj){
+       obj = lastObj;
+        return;
+    }else{
+        setTimeout( fetchYoloInfo, 30000);
+        return;
+    }
+    //fetchYoloInfo();
+});
+
+</script>
+
+</body>
+</html>
